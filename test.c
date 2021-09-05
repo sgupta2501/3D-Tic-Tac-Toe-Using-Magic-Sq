@@ -8,14 +8,13 @@ int main(int argc, char *argv[])
 	magic_cube_gen(mcube,n);
 	int temp[50][50][50];
 	copy_cube(temp,mcube,n);
-	int p=0,ai=0; //if player plays first, p=14 and ai=13
-
 	int mconst=(n*((n*n*n)+1))/2;
 	int a,b,c;
-	// int p1[14],ai[13];
+	int p1[14],ai[13];
 	int pindex=0,aindex=0;
 	int turn=P1;
-	while((p+ai)!=27){
+	int first=0;
+	while(((pindex+aindex)!=27)){
 		turn=P1;
 		int pos;
 		print_board(temp,n);
@@ -23,6 +22,7 @@ int main(int argc, char *argv[])
 		scanf("%d",&pos);
 		if(put_val(temp,n,turn,pos)==0){
 			printf("success\n");
+
 		}
 		else{
 			printf("value filled\n");
@@ -30,9 +30,23 @@ int main(int argc, char *argv[])
 		turn=AI;
 		p1[pindex]=pos;
 		pindex+=1;
-		if((p+ai)<2){
+		if(((pindex+aindex)<2) && (first==0)){
+			first=1;
 			if(pos==14){
-
+				if(put_val(temp,n,turn,20)==0){
+					printf("AI played at position 20\n");
+				}
+				else{
+					printf("something went wrong\n");
+				}
+			}
+			else{
+				if(put_val(temp,n,turn,14)==0){
+					printf("AI played at position 14\n");
+				}
+				else{
+					printf("something went wrong\n");
+				}
 			}
 		}
 		// else{
