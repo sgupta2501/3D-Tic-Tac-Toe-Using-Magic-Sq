@@ -14,44 +14,51 @@ int main(int argc, char *argv[])
 	int pindex=0,aindex=0;
 	int turn=P1;
 	int first=0;
-	while(((pindex+aindex)!=27)){
-		turn=P1;
-		int pos;
-		print_board(temp,n);
-		printf("enter positon\n");
-		scanf("%d",&pos);
-		if(put_val(temp,n,turn,pos)==0){
-			printf("success\n");
+	printf("%d\n",check_collinear(mcube,20,18,23));
+	// find_pos(mcube,&a,&b,&c,n,25);
+	// printf("%d %d %d\n",a,b,c);
+	// while(((pindex+aindex)!=27)){
+	// 	turn=P1;
+	// 	int pos;
+	// 	print_board(temp,n);
+	// 	printf("enter positon\n");
+	// 	scanf("%d",&pos);
+	// 	if(put_val(temp,n,turn,pos)==0){
+	// 		printf("success\n");
 
-		}
-		else{
-			printf("value filled\n");
-		}
-		turn=AI;
-		p1[pindex]=pos;
-		pindex+=1;
-		if(((pindex+aindex)<2) && (first==0)){
-			first=1;
-			if(pos==14){
-				if(put_val(temp,n,turn,20)==0){
-					printf("AI played at position 20\n");
-				}
-				else{
-					printf("something went wrong\n");
-				}
-			}
-			else{
-				if(put_val(temp,n,turn,14)==0){
-					printf("AI played at position 14\n");
-				}
-				else{
-					printf("something went wrong\n");
-				}
-			}
-		}
-		// else{
-		// }
-		// if()
-	}
+	// 	}
+	// 	else{
+	// 		printf("value filled\n");
+	// 	}
+	// 	turn=AI;
+	// 	p1[pindex]=pos;
+	// 	pindex+=1;
+	// 	if(((pindex+aindex)<2) && (first==0)){
+	// 		first=1;
+	// 		if(pos==14){
+	// 			if(put_val(temp,n,turn,mcube[0][0][0])==true){
+	// 				printf("AI played at position %d\n",mcube[0][0][0]);
+	// 			}
+	// 			else{
+	// 				printf("something went wrong\n");
+	// 			}
+	// 		}
+	// 		else{
+	// 			int p=n/2;
+	// 			if(put_val(temp,n,turn,mcube[p][p][p])==true){
+	// 				printf("AI played at position %d\n",mcube[p][p][p]);
+	// 				ai[aindex]=mcube[p][p][p];
+	// 				aindex+=1;
+	// 			}
+	// 			else{
+	// 				printf("something went wrong\n");
+	// 			}
+	// 		}
+	// 	}
+	// 	else{
+			
+	// 	}
+		
+	// }
 	return 0;
 }

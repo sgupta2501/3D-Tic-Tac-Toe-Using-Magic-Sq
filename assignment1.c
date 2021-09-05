@@ -1,4 +1,12 @@
 #include "assignment1.h"
+int check_if_present(int a[],int lenght,int find){
+	for(int i=0;i<lenght;i++){
+		if(a[i]==find){
+			return true;
+		}
+	}
+	return false;
+}
 void print_cube(int c[][50][50],int n){
  	for(int i=0;i<n;i++)
 	{
@@ -56,12 +64,12 @@ int put_val(int d[][50][50],int n,int player,int find){
 			for(int k=0;k<n;k++)
 			{	if(d[i][j][k]==find){
 					d[i][j][k]=player;
-					return 0;
+					return true;
 				}
 			}	
 		}
 	}
-	return 1;
+	return false;
 }
 void find_pos(int d[][50][50],int *a,int *b,int *c,int n,int find){
 	for(int i=0;i<n;i++)
@@ -79,6 +87,96 @@ void find_pos(int d[][50][50],int *a,int *b,int *c,int n,int find){
 		}
 	}
 
+}
+int check_sum(int a, int b, int c){
+	if((a+b+c)==42){
+		printf("sum checking success\n");
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+
+int check_collinear(int mcube[][50][50], int a, int b, int c){
+	int i,j,k;
+	int i1,j1,k1,i2,j2,k2,i3,j3,k3;
+	float area;
+	double x_ratio, y_ratio, z_ratio;
+	for(i=0;i<3;i++){
+	
+		for(j=0;j<3;j++){
+			for(k=0;k<3;k++){
+				if(mcube[i][j][k]==a){
+					i1=i;
+					j1=j;
+					k1=k;
+					
+					// printf("%d : %d %d %d\n",mcube[i][j][k],i,j,k);
+				}
+				
+				else if(mcube[i][j][k]==b){
+					i2=i;
+					j2=j;
+					k2=k;
+					
+					// printf("%d : %d %d %d\n",mcube[i][j][k],i,j,k);
+				}
+				
+				else if(mcube[i][j][k]==c){
+					i3=i;
+					j3=j;
+					k3=k;
+					
+					// printf("%d : %d %d %d\n",mcube[i][j][k],i,j,k);
+				}
+				else{
+					continue;
+				}
+			}			
+		}
+		
+		int l=-100;
+		int tx1=i2-i1;
+		int ty1=j2-j1;
+		int tz1=k2-k1;
+		int tx2=i3-i2;
+		int ty2=j3-j2;
+		int tz2=k3-k2;
+		printf("%d %d %d %d %d %d\n",tx1,ty1,tz1,tx2,ty2,tz2);
+
+		int l1=0,l2=0,l3=0;
+		if(tx2==0){
+			l1=0;
+		}
+		else{
+			l1=tx1/tx2;
+		}
+		if(ty2==0){
+			l2=0;
+		}
+		else{
+			l2=ty1/ty2;
+			if(l1!=0){
+				if(l2!=l1){
+					return false;
+				}
+			}
+		}
+		if(tz2==0){
+			l3=0;
+		}
+		else{
+			l3=tz1/tz2;
+			if(l2!=0){
+				if(l2!=l3){
+					return false;
+				}
+			}
+		}
+		return true;	
+    }
 }
 void magic_cube_gen(int mcube[][50][50],int n){
 	int count=2,i, j, k;
