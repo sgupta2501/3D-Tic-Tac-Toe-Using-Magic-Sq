@@ -1,15 +1,87 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "assignment1.h"
+void print_cube(int c[][50][50],int n){
+ 	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<n;j++)
+		{
+			for(int k=0;k<n;k++)
+			{
+				printf("%d ",c[i][j][k]);
+			}
+			printf("\n");		
+		}
+		printf("\n");
+	}
+}
+void print_board(int c[][50][50],int n){
+ 	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<n;j++)
+		{
+			for(int k=0;k<n;k++)
+			{
+				if(c[i][j][k]==P1){
+					printf("%c\t",P1SYM);
+				}
+				else if(c[i][j][k]==AI){
+					printf("%c\t",AISYM);
+				}
+				else{
+					printf("%d\t",c[i][j][k]);
+				}
+				// printf("%d ",c[i][j][k]);
+			}
+			printf("\n");		
+		}
+		printf("\n");
+	}
+}
+void copy_cube(int other[][50][50],int main[][50][50],int n){
+	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<n;j++)
+		{
+			for(int k=0;k<n;k++)
+			{
+				other[i][j][k]=main[i][j][k];
+			}	
+		}
+	}
+}
+int put_val(int d[][50][50],int n,int player,int find){
+	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<n;j++)
+		{
+			for(int k=0;k<n;k++)
+			{	if(d[i][j][k]==find){
+					d[i][j][k]=player;
+					return 0;
+				}
+			}	
+		}
+	}
+	return 1;
+}
+void find_pos(int d[][50][50],int *a,int *b,int *c,int n,int find){
+	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<n;j++)
+		{
+			for(int k=0;k<n;k++)
+			{
+				if(d[i][j][k]==find){
+					*a=i;
+					*b=j;
+					*c=k;
+				}
+			}	
+		}
+	}
 
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
-
-int main(int argc, char *argv[]) 
-{
-	int n;
-	printf("Enter the length of one side of the magic cube\n");
-	scanf("%d",&n);   //taking the size as input
-	int mcube[n][n][n], count=2,i, j, k;
-	
+}
+void magic_cube_gen(int mcube[][50][50],int n){
+	int count=2,i, j, k;
 	for(i=0;i<n;i++)
 	{
 		for(j=0;j<n;j++)
@@ -69,17 +141,5 @@ int main(int argc, char *argv[])
 			mcube[i][j][k] = count;
 		}
 	}
-	for(i=0;i<n;i++)
-	{
-		for(j=0;j<n;j++)
-		{
-			for(k=0;k<n;k++)
-			{
-				printf("%d ",mcube[i][j][k]);
-			}
-			printf("\n");		
-		}
-		printf("\n");
-	}
-	return 0;
 }
+
