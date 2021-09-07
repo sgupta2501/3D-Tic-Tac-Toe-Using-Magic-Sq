@@ -2,8 +2,8 @@
 
 int main(int argc, char *argv[]) 
 {	
-	int empty_spaces[50]={};
-	int empty_length;
+	// int empty_spaces[50]={};
+	// int empty_length;
 	int n;
  	scanf("%d",&n);   //taking the size as input
 	int mcube[50][50][50];
@@ -22,13 +22,13 @@ int main(int argc, char *argv[])
 	// 	print_board(temp,n);
 	// 	printf("enter positon\n");
 	// 	scanf("%d",&pos);
-	// while (!put_val)
+	//// while (!put_val)
 	// 	if(put_val(temp,n,turn,pos)==true){
 	// 		printf("success\n");
 
 	// 	}
 	// 	else{
-	// do something 
+	//// do something 
 	// 		printf("value filled\n");
 	// 	}
 	// 	turn=AI;
