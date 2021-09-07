@@ -1,13 +1,13 @@
 #include "assignment1.h"
-void is_collinar(int p1[], int ai[] , int pindex, int aiindex)
+void is_collinar(int p1[],int ai[],int pindex,int aindex)
 {
     int i,j;
     for(i-0;i<pindex-1;i++)
     {
         num = p1[pindex-1]+p1[i];
-        if((42-num)<=27)&&(42-num)>=0)
+        if(((42-num)<=27)&&(42-num)>=0)
         {
-            for(j=0;j<aiindex-1;j++)
+            for(j=0;j<aindex-1;j++)
             {
                 if(ai[j]==num)
                 {
@@ -18,6 +18,66 @@ void is_collinar(int p1[], int ai[] , int pindex, int aiindex)
         }
     }
 }
+void empty_spaces(int a[][50][50],int *arr,int *l,int n){
+	int len=0;
+	memset(arr,0,(*l)*sizeof(*a));
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
+			for(int k=0;k<n;k++){
+				if(a[i][j][k]!=AI && a[i][j][k]!=P1){
+					arr[len]=a[i][j][k];
+					len+=1;
+				}
+			}
+		}
+	}
+	*l=len;
+}
+void pos_choice(int a[][50][50],struct options *temp1,struct options *temp2,struct options *temp3){
+	for(int i=0;i<3;i++){
+		if(a[i][0][0]!=AI && a[i][0][0]!=P1){
+			temp1->arr[temp1->index]=a[i][0][0];
+			temp1->index+=1;
+		}
+		if(a[i][0][2]!=AI && a[i][0][2]!=P1){
+			temp1->arr[temp1->index]=a[i][0][2];
+			temp1->index+=1;
+		}
+		if(a[i][2][0]!=AI && a[i][2][0]!=P1){
+			temp1->arr[temp1->index]=a[i][2][0];
+			temp1->index+=1;
+		}
+		if(a[i][2][2]!=AI && a[i][2][2]!=P1){
+			temp1->arr[temp1->index]=a[i][2][2];
+			temp1->index+=1;
+		}
+	}
+	for(int i=0;i<3;i++){
+		if(a[i][1][1]!=AI && a[i][1][1]!=P1){
+			temp2->arr[temp2->index]=a[i][1][1];
+			temp2->index+=1;
+		}
+	}
+	for(int i=0;i<3;i++){
+		if(a[i][0][1]!=AI && a[i][0][1]!=P1){
+			temp3->arr[temp3->index]=a[i][0][1];
+			temp3->index+=1;
+		}
+		if(a[i][1][0]!=AI && a[i][1][0]!=P1){
+			temp3->arr[temp3->index]=a[i][1][0];
+			temp3->index+=1;
+		}
+		if(a[i][2][1]!=AI && a[i][2][1]!=P1){
+			temp3->arr[temp3->index]=a[i][2][1];
+			temp3->index+=1;
+		}
+		if(a[i][1][2]!=AI && a[i][1][2]!=P1){
+			temp3->arr[temp3->index]=a[i][1][2];
+			temp3->index+=1;
+		}
+	}
+}
+
 int check_if_present(int a[],int lenght,int find){
 	for(int i=0;i<lenght;i++){
 		if(a[i]==find){
@@ -25,21 +85,6 @@ int check_if_present(int a[],int lenght,int find){
 		}
 	}
 	return false;
-}
-void empty_spaces(int a[][50][50],int *b,int *l,int n){
-	int len=0;
-	memset(b,0,(*l)*sizeof(*a));
-	for(int i=0;i<n;i++){
-		for(int j=0;j<n;j++){
-			for(int k=0;k<n;k++){
-				if(a[i][j][k]!=AI && a[i][j][k]!=P1){
-					b[len]=a[i][j][k];
-					len+=1;
-				}
-			}
-		}
-	}
-	*l=len;
 }
 void print_cube(int c[][50][50],int n){
  	for(int i=0;i<n;i++)

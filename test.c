@@ -1,5 +1,7 @@
 #include "assignment1.h"
+int point_to_add(int mcube[][50][50],int temp[][50][50],int turn[],int ){
 
+}
 int main(int argc, char *argv[]) 
 {	
 	// int empty_spaces[50]={};
@@ -12,7 +14,9 @@ int main(int argc, char *argv[])
 	copy_cube(temp,mcube,n);
 	int mconst=(n*((n*n*n)+1))/2;
 	int a,b,c;
-	int p1[14],ai[14];
+	int p1[5]={20,4,6,3,9};
+	int ai[5]={16,21,15,25,22};
+
 	int pindex=0,aindex=0;
 	int turn=P1;
 	int first=0;
@@ -57,6 +61,7 @@ int main(int argc, char *argv[])
 	// 		}
 	// 	}
 	// 	else{
+
 	// 		//check for ai win case first (todo) 
 	// 		int t1=p1[pindex];
 	// 		int t2=p1[pindex-1];
