@@ -104,6 +104,9 @@ int check_collinear(int mcube[][50][50], int a, int b, int c){
 	int i1,j1,k1,i2,j2,k2,i3,j3,k3;
 	float area;
 	double x_ratio, y_ratio, z_ratio;
+	if(check_sum(a,b,c)==false){
+		return false;
+	}
 	for(i=0;i<3;i++){
 	
 		for(j=0;j<3;j++){
@@ -113,7 +116,6 @@ int check_collinear(int mcube[][50][50], int a, int b, int c){
 					j1=j;
 					k1=k;
 					
-					// printf("%d : %d %d %d\n",mcube[i][j][k],i,j,k);
 				}
 				
 				else if(mcube[i][j][k]==b){
@@ -121,7 +123,6 @@ int check_collinear(int mcube[][50][50], int a, int b, int c){
 					j2=j;
 					k2=k;
 					
-					// printf("%d : %d %d %d\n",mcube[i][j][k],i,j,k);
 				}
 				
 				else if(mcube[i][j][k]==c){
@@ -129,53 +130,21 @@ int check_collinear(int mcube[][50][50], int a, int b, int c){
 					j3=j;
 					k3=k;
 					
-					// printf("%d : %d %d %d\n",mcube[i][j][k],i,j,k);
 				}
 				else{
 					continue;
 				}
 			}			
 		}
-		
-		int l=-100;
-		int tx1=i2-i1;
-		int ty1=j2-j1;
-		int tz1=k2-k1;
-		int tx2=i3-i2;
-		int ty2=j3-j2;
-		int tz2=k3-k2;
-		printf("%d %d %d %d %d %d\n",tx1,ty1,tz1,tx2,ty2,tz2);
 
-		int l1=0,l2=0,l3=0;
-		if(tx2==0){
-			l1=0;
+		
+		if(area==0){
+			return true;
 		}
-		else{
-			l1=tx1/tx2;
+		else {
+			return false;
 		}
-		if(ty2==0){
-			l2=0;
-		}
-		else{
-			l2=ty1/ty2;
-			if(l1!=0){
-				if(l2!=l1){
-					return false;
-				}
-			}
-		}
-		if(tz2==0){
-			l3=0;
-		}
-		else{
-			l3=tz1/tz2;
-			if(l2!=0){
-				if(l2!=l3){
-					return false;
-				}
-			}
-		}
-		return true;	
+	
     }
 }
 void magic_cube_gen(int mcube[][50][50],int n){
