@@ -136,7 +136,7 @@ int check_collinear(int mcube[][50][50], int a, int b, int c){
 				}
 			}			
 		}
-
+		printf("A:%f\n",area);
 		
 		if(area==0){
 			return true;
