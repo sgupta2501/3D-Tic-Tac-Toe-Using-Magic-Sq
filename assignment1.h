@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include<string.h>
 #define P1 -1
 #define AI -2
 #define P1SYM 'X'

@@ -7,6 +7,21 @@ int check_if_present(int a[],int lenght,int find){
 	}
 	return false;
 }
+void empty_spaces(int a[][50][50],int *b,int *l,int n){
+	int len=0;
+	memset(b,0,(*l)*sizeof(*a));
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
+			for(int k=0;k<n;k++){
+				if(a[i][j][k]!=AI && a[i][j][k]!=P1){
+					b[len]=a[i][j][k];
+					len+=1;
+				}
+			}
+		}
+	}
+	*l=len;
+}
 void print_cube(int c[][50][50],int n){
  	for(int i=0;i<n;i++)
 	{
@@ -136,6 +151,8 @@ int check_collinear(int mcube[][50][50], int a, int b, int c){
 				}
 			}			
 		}
+		area = (i1*(j2*k3 - k2*j3) - i2*(j3*k1 - k3*i1) + i3*(j1*k2 - k1*j2));
+
 		printf("A:%f\n",area);
 		
 		if(area==0){
