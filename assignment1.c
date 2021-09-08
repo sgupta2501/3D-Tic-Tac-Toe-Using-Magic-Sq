@@ -1,26 +1,26 @@
 #include "assignment1.h"
-void is_collinar(int p1[],int ai[],int pindex,int aindex)
-{
-    int i,j;
-    for(i-0;i<pindex-1;i++)
-    {
-        num = p1[pindex-1]+p1[i];
-        if(((42-num)<=27)&&(42-num)>=0)
-        {
-            for(j=0;j<aindex-1;j++)
-            {
-                if(ai[j]==num)
-                {
-                    break;
-                }
-            }
-            check_collinear(mcube[][50][50],a[pindex-1],a[i],num);
-        }
-    }
-}
+// void is_collinar(int p1[],int ai[],int pindex,int aindex)
+// {
+//     int i,j;
+//     for(i-0;i<pindex-1;i++)
+//     {
+//         num = p1[pindex-1]+p1[i];
+//         if(((42-num)<=27)&&(42-num)>=0)
+//         {
+//             for(j=0;j<aindex-1;j++)
+//             {
+//                 if(ai[j]==num)
+//                 {
+//                     break;
+//                 }
+//             }
+//             check_collinear(mcube[][50][50],a[pindex-1],a[i],num);
+//         }
+//     }
+// }
 void empty_spaces(int a[][50][50],int *arr,int *l,int n){
 	int len=0;
-	memset(arr,0,(*l)*sizeof(*a));
+	memset(arr,0,(*l)*sizeof(*arr));
 	for(int i=0;i<n;i++){
 		for(int j=0;j<n;j++){
 			for(int k=0;k<n;k++){

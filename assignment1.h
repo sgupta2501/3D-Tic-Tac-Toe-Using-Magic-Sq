@@ -21,5 +21,7 @@ int put_val(int d[][50][50],int,int,int);
 void find_pos(int d[][50][50],int *,int *,int *,int,int);
 int check_sum(int,int,int);
 int check_collinear(int mcube[][50][50],int,int,int);
-void is_collinar(int mcube[][50][50],int [],int [],int,int);
+// void is_collinar(int mcube[][50][50],int [],int [],int,int);
 void magic_cube_gen(int mcube[][50][50],int);
+int modulas_sub(int,int);
+int point_to_add(int mcube[][50][50],int temp[][50][50],int,int [],int);

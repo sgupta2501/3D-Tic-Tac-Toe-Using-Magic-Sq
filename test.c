@@ -1,7 +1,4 @@
 #include "assignment1.h"
-int point_to_add(int mcube[][50][50],int temp[][50][50],int turn[],int ){
-
-}
 int main(int argc, char *argv[]) 
 {	
 	// int empty_spaces[50]={};
@@ -14,12 +11,21 @@ int main(int argc, char *argv[])
 	copy_cube(temp,mcube,n);
 	int mconst=(n*((n*n*n)+1))/2;
 	int a,b,c;
-	int p1[5]={20,4,6,3,9};
-	int ai[5]={16,21,15,25,22};
-
+	int ai[3]={20,15,4};
+	// int ai[5]={16,21,15,25,22};
+	int empty_pos[27];
+	int len_empty=0;
 	int pindex=0,aindex=0;
 	int turn=P1;
 	int first=0;
+ //    int cube[50][50][50]={{{20,18,4},{15,1,26},{7,23,12}},
+ //    				{{6,19,17},{25,14,3},{11,9,22}},
+ //    				{{16,5,21},{2,27,13},{24,10,8}}};
+	// int board[50][50][50]={{{AI,18,AI},{AI,P1,26},{7,23,P1}},
+ //    				{{6,19,17},{25,14,3},{11,9,22}},
+ //    				{{16,5,21},{2,27,13},{24,10,8}}};
+	// print_cube(cube,3);
+	// printf("%d\n",point_to_add(cube,board,AI,ai,3));
 	// while(((pindex+aindex)!=27)){
 	// 	turn=P1;
 	// 	int pos;
