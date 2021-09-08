@@ -318,20 +318,21 @@ int point_to_add(int mcube[][50][50],int temp[][50][50],int arr[],int len){
 	int empty_pos[27];
 	int empty_pos_len;
 	empty_spaces(temp,empty_pos,&empty_pos_len,3);
-
+	if(len==1){
+		return -1;
+	}
 	for(int i=0;i<len;i++){
 		for(int j=1;j<len;j++){
 			if(i==j){
 				continue;
 			}
 			int pos=modulas_sub(42,(arr[j]+arr[i]));
-			// printf("%d,%d,%d\n",arr[i],arr[j],pos);
-
 			if(pos>=1 && pos<=27){
 				if(check_collinear(mcube,arr[i],arr[j],pos)==false){
 					continue;
 				}
 				if(check_if_present(empty_pos,empty_pos_len,pos)==true){
+					printf("%d,%d\n",arr[j],arr[i]);
 					return pos;
 				}
 			}

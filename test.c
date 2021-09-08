@@ -31,7 +31,6 @@ int main(int argc, char *argv[])
 	// printf("%d\n",point_to_add(cube,board,AI,ai,3));
 	// from here
 	int choice=1;
-	int first_choice=1;
 	while(1){
 		printf("player first or ai?\n");
 		printf("1:player(default)\n");
@@ -43,6 +42,7 @@ int main(int argc, char *argv[])
 		else{
 			if(choice==1){
 				break;
+				turn=P1;
 			}
 			else if(choice==2){
 				turn=AI;
@@ -51,155 +51,48 @@ int main(int argc, char *argv[])
 		}
 		system("clear");
 	}
-	while(((pindex+aindex)!=27)){
-		int ai_line=check_lines(mcube,ai);
-		int p1_line=check_lines(mcube,p1);
-		printf("AI lines:%d\n",ai_line);
-		printf("P1 lines:%d\n",p1_line);
-		printf("AI moves:");
-		display_moves(ai,aindex);
-		printf("Player Moves:");
-		display_moves(p1,pindex);
-		int pos;
-		if(turn==AI){
-			if(put_val(temp,n,turn,mcube[1][1][1])==true){
-					printf("AI played at position %d\n",mcube[1][1][1]);
-					ai[aindex]=mcube[1][1][1];
-					aindex+=1;
-					printf("AI moves:");
-					display_moves(ai,aindex);
-					printf("Player Moves:");
-					display_moves(p1,pindex);
-				}
-				else{
-					printf("something went wrong\n");
-				}
-				first=1;
-		}
-		print_board(temp,mcube,n);
-
-		turn=P1;
-		printf("enter positon\n");
-		scanf("%d",&pos);
-
-		while (put_val(temp,n,turn,pos)==false){
-			printf("value filled\n");
+	if(choice==1){
+		while(((pindex+aindex)!=27)){
+			// int ai_line=check_lines(mcube,ai);
+			// int p1_line=check_lines(mcube,p1);
+			// printf("AI lines:%d\n",ai_line);
+			// printf("P1 lines:%d\n",p1_line);
+			printf("AI moves:");
+			display_moves(ai,aindex);
+			printf("Player Moves:");
+			display_moves(p1,pindex);
+			int pos;
+			print_board(temp,mcube,n);
+			turn=P1;
 			printf("enter positon\n");
 			scanf("%d",&pos);
-		}
-		turn=AI;
-		p1[pindex]=pos;
-		pindex+=1;
-		if(((pindex+aindex)<2) && (first==0)){
-			first=1;
-			printf("this\n");
-			if(pos==14){
-				if(put_val(temp,n,turn,mcube[0][0][0])==true){
-					printf("AI played at position %d\n",mcube[0][0][0]);
-					ai[aindex]=mcube[0][0][0];
-					aindex+=1;
 
-				}
-				else{
-					printf("something went wrong\n");
-				}
+			while (put_val(temp,n,turn,pos)==false){
+				printf("value filled\n");
+				printf("enter positon\n");
+				scanf("%d",&pos);
 			}
-			else{
-				int p=n/2;
-				if(put_val(temp,n,turn,mcube[p][p][p])==true){
-					printf("AI played at position %d\n",mcube[p][p][p]);
-					ai[aindex]=mcube[p][p][p];
-					aindex+=1;
-				}
-				else{
-					printf("something went wrong\n");
-				}
-			}
-		}
-		else{
-			if((choice==2) && (first_choice==1)){
-				printf("here\n");
-				first_choice=0;
-					pos_choice(temp,&second_preference,&first_preference,&third_preference);
-					if((first_preference.index)>=0){
-						if(put_val(temp,n,turn,first_preference.arr[0])==true){
-							printf("AI played at:%d\n,successfully\n",first_preference.arr[0]);
-							ai[aindex]=first_preference.arr[0];
-							aindex+=1;
-						}
-						else{
-							printf("something went wrong\n");
-						}
-					}
-					else if((second_preference.index)>=0){
-						if(put_val(temp,n,turn,second_preference.arr[0])==true){
-							printf("AI played at:%d\n,successfully\n",second_preference.arr[0]);
-							ai[aindex]=second_preference.arr[0];
-							aindex+=1;
-						}
-						else{
-							printf("something went wrong\n");
-						}
-					}
-					else if((third_preference.index)>=0){
-						if(put_val(temp,n,turn,third_preference.arr[0])==true){
-							printf("AI played at:%d\n,successfully\n",third_preference.arr[0]);
-							ai[aindex]=third_preference.arr[0];
-							aindex+=1;
-						}
-						else{
-							printf("something went wrong\n");
-						}
-					}
-				turn=P1;
-				continue;
-
-			}
-			//blocking the player
 			turn=AI;
-			int block=point_to_add(mcube,temp,p1,pindex);
-			if(block==-1){
-				printf("nothing to block\n");
-				block=point_to_add(mcube,temp,ai,aindex);
-				if(block==-1){
-					pos_choice(temp,&second_preference,&first_preference,&third_preference);
-					if((first_preference.index)>=0){
-						if(put_val(temp,n,turn,first_preference.arr[0])==true){
-							printf("AI played at:%d\n,successfully\n",first_preference.arr[0]);
-							ai[aindex]=first_preference.arr[0];
-							aindex+=1;
-						}
-						else{
-							printf("something went wrong\n");
-						}
-					}
-					else if((second_preference.index)>=0){
-						if(put_val(temp,n,turn,second_preference.arr[0])==true){
-							printf("AI played at:%d\n,successfully\n",second_preference.arr[0]);
-							ai[aindex]=second_preference.arr[0];
-							aindex+=1;
-						}
-						else{
-							printf("something went wrong\n");
-						}
-					}
-					else if((third_preference.index)>=0){
-						if(put_val(temp,n,turn,third_preference.arr[0])==true){
-							printf("AI played at:%d\n,successfully\n",third_preference.arr[0]);
-							ai[aindex]=third_preference.arr[0];
-							aindex+=1;
-						}
-						else{
-							printf("something went wrong\n");
-						}
-					}
+			p1[pindex]=pos;
+			pindex+=1;
+			if(((pindex+aindex)<2) && (first==0)){
+				first=1;
+				if(pos==14){
+					if(put_val(temp,n,turn,mcube[0][0][0])==true){
+						printf("AI played at position %d\n",mcube[0][0][0]);
+						ai[aindex]=mcube[0][0][0];
+						aindex+=1;
 
-
+					}
+					else{
+						printf("something went wrong\n");
+					}
 				}
 				else{
-					if(put_val(temp,n,AI,block)==true){
-						printf("AI played at:%d\n,successfully\n",block);
-						ai[aindex]=block;
+					int p=n/2;
+					if(put_val(temp,n,turn,mcube[p][p][p])==true){
+						printf("AI played at position %d\n",mcube[p][p][p]);
+						ai[aindex]=mcube[p][p][p];
 						aindex+=1;
 					}
 					else{
@@ -208,19 +101,200 @@ int main(int argc, char *argv[])
 				}
 			}
 			else{
-				ai[aindex]=block;
-				aindex+=1;
-				if(put_val(temp,n,AI,block)==true){
-					printf("AI played at:%d\n,successfully\n",block);
+
+				//blocking the player
+				turn=AI;
+				int block=point_to_add(mcube,temp,p1,pindex);
+				printf("block:%d\n",block);
+				if(block==-1){
+					printf("ai_len:%d\n",aindex);
+					block=point_to_add(mcube,temp,ai,aindex);
+					if(block==-1){
+						printf("inhere\n");
+						pos_choice(temp,&second_preference,&first_preference,&third_preference);
+						if((first_preference.index)>=0){
+							if(put_val(temp,n,turn,first_preference.arr[0])==true){
+								printf("AI played at:%d\n,successfully\n",first_preference.arr[0]);
+								ai[aindex]=first_preference.arr[0];
+								aindex+=1;
+							}
+							else{
+								printf("something went wrong\n");
+							}
+						}
+						else if((second_preference.index)>=0){
+							if(put_val(temp,n,turn,second_preference.arr[0])==true){
+								printf("AI played at:%d\n,successfully\n",second_preference.arr[0]);
+								ai[aindex]=second_preference.arr[0];
+								aindex+=1;
+							}
+							else{
+								printf("something went wrong\n");
+							}
+						}
+						else if((third_preference.index)>=0){
+							if(put_val(temp,n,turn,third_preference.arr[0])==true){
+								printf("AI played at:%d\n,successfully\n",third_preference.arr[0]);
+								ai[aindex]=third_preference.arr[0];
+								aindex+=1;
+							}
+							else{
+								printf("something went wrong\n");
+							}
+						}
+
+
+					}
+					else{
+						if(put_val(temp,n,AI,block)==true){
+							printf("AI played at:%d\n,successfully\n",block);
+							ai[aindex]=block;
+							aindex+=1;
+						}
+						else{
+							printf("something went wrong\n");
+						}
+					}
+				}
+				else{
+					ai[aindex]=block;
+					aindex+=1;
+					if(put_val(temp,n,AI,block)==true){
+						printf("AI played at:%d\n,successfully\n",block);
+					}
+					else{
+						printf("something went wrong\n");
+					}
+				}
+						
+			}
+			
+		}
+	}
+	else if(choice==2){
+		printf("ai plays\n");
+		while(((pindex+aindex)!=27)){
+			turn=AI;
+			// int ai_line=check_lines(mcube,ai);
+			// int p1_line=check_lines(mcube,p1);
+			// printf("AI lines:%d\n",ai_line);
+			// printf("P1 lines:%d\n",p1_line);
+			printf("AI moves:");
+			display_moves(ai,aindex);
+			printf("Player Moves:");
+			display_moves(p1,pindex);
+			int pos;
+			printf("\n\n");
+			if(((pindex+aindex)<2) && (first==0)){
+				printf("in here\n");
+				first=1;
+				if(put_val(temp,n,AI,14)==true){
+					printf("AI played at:%d\n,successfully\n",14);
+					ai[aindex]=14;
+					aindex+=1;
 				}
 				else{
 					printf("something went wrong\n");
 				}
+				print_board(temp,mcube,n);
+				printf("enter positon\n");
+				scanf("%d",&pos);
+
+				while (put_val(temp,n,P1,pos)==false){
+					printf("value filled\n");
+					printf("enter positon\n");
+					scanf("%d",&pos);
+				}
+				p1[pindex]=pos;
+				pindex+=1;
+
 			}
-			turn=P1;
-					
+			else{	
+				turn=AI;
+				printf("%d\n",pindex);
+				int block=point_to_add(mcube,temp,p1,pindex);
+				if(block==-1){	
+					printf("ai:%d\n",aindex);				
+					block=point_to_add(mcube,temp,ai,aindex);
+					if(block==-1){
+						pos_choice(temp,&second_preference,&first_preference,&third_preference);
+						if((first_preference.index)>=0){
+							if(put_val(temp,n,turn,first_preference.arr[0])==true){
+								printf("AI played at:%d\n,successfully\n",first_preference.arr[0]);
+								ai[aindex]=first_preference.arr[0];
+								aindex+=1;
+							}
+							else{
+								printf("something went wrong\n");
+							}
+						}
+						else if((second_preference.index)>=0){
+							if(put_val(temp,n,turn,second_preference.arr[0])==true){
+								printf("AI played at:%d\n,successfully\n",second_preference.arr[0]);
+								ai[aindex]=second_preference.arr[0];
+								aindex+=1;
+							}
+							else{
+								printf("something went wrong\n");
+							}
+						}
+						else if((third_preference.index)>=0){
+							if(put_val(temp,n,turn,third_preference.arr[0])==true){
+								printf("AI played at:%d\n,successfully\n",third_preference.arr[0]);
+								ai[aindex]=third_preference.arr[0];
+								aindex+=1;
+							}
+							else{
+								printf("something went wrong\n");
+							}
+						}
+
+
+					}
+					else{
+						if(put_val(temp,n,AI,block)==true){
+							printf("AI played at:%d\n,successfully\n",block);
+							ai[aindex]=block;
+							aindex+=1;
+						}
+						else{
+							printf("something went wrong\n");
+						}
+					}
+				}
+				else{
+					ai[aindex]=block;
+					aindex+=1;
+					if(put_val(temp,n,AI,block)==true){
+						printf("AI played at:%d\n,successfully\n",block);
+					}
+					else{
+						printf("something went wrong\n");
+					}
+				}
+
+				print_board(temp,mcube,n);
+
+				printf("enter positon\n");
+				scanf("%d",&pos);
+				while (put_val(temp,n,P1,pos)==false){
+					printf("value filled\n");
+					printf("enter positon\n");
+					scanf("%d",&pos);
+				}
+				p1[pindex]=pos;
+				pindex+=1;
+
+			}
+			// while (put_val(temp,n,turn,pos)==false){
+			// 	printf("value filled\n");
+			// 	printf("enter positon\n");
+			// 	scanf("%d",&pos);
+			// }
+
+
+
 		}
-		
 	}
 	return 0;
 }
