@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
 	// printf("%d\n",point_to_add(cube,board,AI,ai,3));
 	// from here
 	int choice=1;
+	int first_choice=1;
 	while(1){
 		printf("player first or ai?\n");
 		printf("1:player(default)\n");
@@ -117,7 +118,8 @@ int main(int argc, char *argv[])
 			}
 		}
 		else{
-			if(choice==2){
+			if((choice==2) && (first_choice==1)){
+				first_choice=0;
 					pos_choice(temp,&second_preference,&first_preference,&third_preference);
 					if((first_preference.index)>=0){
 						if(put_val(temp,n,turn,first_preference.arr[0])==true){
