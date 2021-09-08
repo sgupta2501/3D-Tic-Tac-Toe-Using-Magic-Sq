@@ -183,11 +183,11 @@ int check_collinear(int mcube[][50][50], int a, int b, int c){
 	int i1,j1,k1,i2,j2,k2,i3,j3,k3;
 	float area;
 	double x_ratio, y_ratio, z_ratio;
+	printf("%d,%d,%d\n",a,b,c);
 	if(check_sum(a,b,c)==false){
 		return false;
 	}
 	for(i=0;i<3;i++){
-	
 		for(j=0;j<3;j++){
 			for(k=0;k<3;k++){
 				if(mcube[i][j][k]==a){
@@ -195,6 +195,7 @@ int check_collinear(int mcube[][50][50], int a, int b, int c){
 					j1=j;
 					k1=k;
 					
+					printf("%d : %d %d %d\n",mcube[i][j][k],i,j,k);
 				}
 				
 				else if(mcube[i][j][k]==b){
@@ -202,6 +203,7 @@ int check_collinear(int mcube[][50][50], int a, int b, int c){
 					j2=j;
 					k2=k;
 					
+					printf("%d : %d %d %d\n",mcube[i][j][k],i,j,k);
 				}
 				
 				else if(mcube[i][j][k]==c){
@@ -209,15 +211,28 @@ int check_collinear(int mcube[][50][50], int a, int b, int c){
 					j3=j;
 					k3=k;
 					
+					printf("%d : %d %d %d\n",mcube[i][j][k],i,j,k);
 				}
 				else{
 					continue;
 				}
 			}			
 		}
+		
+		/*x_ratio=(float)(i2-i1)/(i3-i1);
+		y_ratio=(float)(j2-j1)/(j3-j1);
+		z_ratio=(float)(k2-k1)/(k3-k1);*/
+		
 		area = (i1*(j2*k3 - k2*j3) - i2*(j3*k1 - k3*i1) + i3*(j1*k2 - k1*j2));
-
-		printf("A:%f\n",area);
+		
+		printf("%f\n", area);
+		
+		/*if((x_ratio == y_ratio)&&(y_ratio == z_ratio)){
+			return 1;
+		}
+		else {
+			return 0;
+		}*/
 		
 		if(area==0){
 			return true;
@@ -289,5 +304,41 @@ void magic_cube_gen(int mcube[][50][50],int n){
 			mcube[i][j][k] = count;
 		}
 	}
+}
+int modulas_sub(int a,int b){
+	if((a-b)<0){
+		return (-1)*(a-b);
+	}
+	else{
+		return (a-b);
+	}
+}
+int point_to_add(int mcube[][50][50],int temp[][50][50],int arr[],int len){
+	int empty_pos[27];
+	int empty_pos_len;
+	empty_spaces(temp,empty_pos,&empty_pos_len,3);
+
+	for(int i=0;i<len;i++){
+		for(int j=1;j<len;j++){
+			if(i==j){
+				continue;
+			}
+			int pos=modulas_sub(42,(arr[j]+arr[i]));
+			printf("%d,%d,%d\n",arr[i],arr[j],pos);
+
+			if(pos>=1 && pos<=27){
+				if(check_collinear(mcube,arr[i],arr[j],pos)==false){
+					continue;
+				}
+				if(check_if_present(empty_pos,empty_pos_len,pos)==true){
+					return pos;
+				}
+			}
+			else{
+				continue;
+			}
+		}
+	}
+	return -1;
 }
 
