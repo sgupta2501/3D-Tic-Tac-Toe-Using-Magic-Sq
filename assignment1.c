@@ -350,7 +350,7 @@ int check_lines(int mcube[0][50][50], int list[]){
 	for(i=0;list[i]!=0;i++){
 		for(j=i+1;list[j]!=0;j++){
 			for(k=j+1;list[k]!=0;k++){
-				if(check_sum(list[i],list[j],list[k])==1 && check_collinear(mcube,list[i],list[j],list[k])==1)
+				if(check_sum(list[i],list[j],list[k])==true && check_collinear(mcube,list[i],list[j],list[k])==true)
 				count++;
 			}
 		}

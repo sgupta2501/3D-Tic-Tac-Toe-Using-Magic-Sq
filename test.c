@@ -52,7 +52,6 @@ int main(int argc, char *argv[])
 		system("clear");
 	}
 	while(((pindex+aindex)!=27)){
-		system("clear");
 		int ai_line=check_lines(mcube,ai);
 		int p1_line=check_lines(mcube,p1);
 		printf("AI lines:%d\n",ai_line);
@@ -119,6 +118,7 @@ int main(int argc, char *argv[])
 		}
 		else{
 			if((choice==2) && (first_choice==1)){
+				printf("here\n");
 				first_choice=0;
 					pos_choice(temp,&second_preference,&first_preference,&third_preference);
 					if((first_preference.index)>=0){
@@ -156,6 +156,7 @@ int main(int argc, char *argv[])
 
 			}
 			//blocking the player
+			turn=AI;
 			int block=point_to_add(mcube,temp,p1,pindex);
 			if(block==-1){
 				printf("nothing to block\n");
@@ -196,7 +197,7 @@ int main(int argc, char *argv[])
 
 				}
 				else{
-					if(put_val(temp,n,turn,block)==true){
+					if(put_val(temp,n,AI,block)==true){
 						printf("AI played at:%d\n,successfully\n",block);
 						ai[aindex]=block;
 						aindex+=1;
@@ -209,7 +210,7 @@ int main(int argc, char *argv[])
 			else{
 				ai[aindex]=block;
 				aindex+=1;
-				if(put_val(temp,n,turn,block)==true){
+				if(put_val(temp,n,AI,block)==true){
 					printf("AI played at:%d\n,successfully\n",block);
 				}
 				else{
