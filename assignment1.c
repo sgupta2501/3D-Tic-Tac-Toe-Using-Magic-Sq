@@ -2,11 +2,11 @@
 void display_moves(int a[],int size)
 {
     int i;
-  for(i=0;i<size;i++)
-  {
-      printf("%d, ",a[i]);
-  }
-  printf("\n");
+      for(i=0;i<size;i++)
+      {
+          printf("%d, ",a[i]);
+      }
+      printf("\n");
 }
 
 void empty_spaces(int a[][50][50],int *arr,int *l,int n){
@@ -198,11 +198,12 @@ int check_sum(int a, int b, int c){
 }
 
 
-int check_collinear(int mcube[0][50][50], int a, int b, int c){
+int check_collinear(int mcube[][50][50], int a, int b, int c){
 	int i,j,k;
 	int i1,j1,k1,i2,j2,k2,i3,j3,k3;
 	int area;
 	double x_ratio, y_ratio, z_ratio;
+	//printf("In check collinear\n");
 	if(check_sum(a,b,c)==false){
 		return false;
 	}
@@ -239,20 +240,22 @@ int check_collinear(int mcube[0][50][50], int a, int b, int c){
     if ((j1==j2)&&(j2==j3)) c2=1;
     if ((k1==k2)&&(k2==k3)) c3=1;
     
+    //printf("points: (%d,%d,%d),(%d,%d,%d),(%d,%d,%d)\n",i1,j1,k1,i2,j2,k2,i3,j3,k3);
+    //printf("c1=%d,c2=%d,c3=%d\n",c1,c2,c3);
+    
     if (c1+c2+c3 == 2) //vertical/horiz 3 points on an edge or face of the cube
         area=0;
-    else if (c1+c2+c3 == 1) // points on a diagonal on the face of the cube
-        {
-            if (((c1==1)&&(j1+j2+j3==3)&&(k1+k2+k3==3))||((c2==1)&&(i1+i2+i3==3)&&(k1+k2+k3==3))||((c3==1)&&(i1+i2+i3==3)&&(j1+j2+j3==3)))
+        // points on a diagonal on the face of the cube
+    else if ((c1+c2+c3 == 1)&&(((c1==1)&&(j1+j2+j3==3)&&(k1+k2+k3==3))||((c2==1)&&(i1+i2+i3==3)&&(k1+k2+k3==3))||((c3==1)&&(i1+i2+i3==3)&&(j1+j2+j3==3))))
                 area=0;
-        }
-    else if (c1+c2+c3 == 0)
-        {
-            if ((i1+i2+i3==3)&&(j1+j2+j3==3)&&(k1+k2+k3==3))
+        //body diagonal
+    else if ((c1+c2+c3 == 0)&&(i1+i2+i3==3)&&(j1+j2+j3==3)&&(k1+k2+k3==3))
+            {
+                //printf("i1+i2+i3=%d, j1+j2+j3=%d, k1+k2+k3=%d\n",i1+i2+i3,j1+j2+j3,k1+k2+k3);
                 area=0;            
-        }
+            }
     else area=1;                
-		
+	//printf("in check collinear, area=%d\n",area);	
 		if(area==0){
 			return true;
 		}
@@ -361,15 +364,17 @@ int point_to_add(int mcube[][50][50],int temp[][50][50],int arr[],int len){
 	return -1;
 }
 
-int check_lines(int mcube[0][50][50], int list[]){
+int check_lines(int mcube[][50][50], int list[]){
 	int i,j,k;
 	int count=0;
-	
 	for(i=0;list[i]!=0;i++){
 		for(j=i+1;list[j]!=0;j++){
 			for(k=j+1;list[k]!=0;k++){
-				if(check_sum(list[i],list[j],list[k])==true && check_collinear(mcube,list[i],list[j],list[k])==true)
-				count++;
+                if((check_sum(list[i],list[j],list[k])==true)&&(check_collinear(mcube,list[i],list[j],list[k]) == true))
+				{
+				    //printf("check lines: list[i]=%d,list[j]=%d,list[k]%d\n",list[i],list[j],list[k]);
+				    count++;
+				}
 			}
 		}
 	}
