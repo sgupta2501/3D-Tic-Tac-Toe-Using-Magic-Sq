@@ -201,7 +201,7 @@ int check_sum(int a, int b, int c){
 int check_collinear(int mcube[0][50][50], int a, int b, int c){
 	int i,j,k;
 	int i1,j1,k1,i2,j2,k2,i3,j3,k3;
-	float area;
+	int area;
 	double x_ratio, y_ratio, z_ratio;
 	if(check_sum(a,b,c)==false){
 		return false;
@@ -231,8 +231,15 @@ int check_collinear(int mcube[0][50][50], int a, int b, int c){
 		}
     }
 
-    	area = (i1*(j2*k3 - k2*j3) - j1*(i2*k3 - k2*i3) + k1*(i2*j3 - i3*j2));
-		
+	int c1=(i3-i1)/(i2-i1);
+	int c2=(j3-j1)/(j2-j1);
+	int c3=(k3-k1)/(k2-k1);
+	if((c1==c2) && (c2==c3)){
+		area=0;
+	}
+	else{
+		area=1;
+	}
 		
 
 		
