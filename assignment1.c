@@ -137,7 +137,6 @@ void print_board(int c[][50][50],int mcube[][50][50],int n){
 				else{
 					printf("%d\t",c[i][j][k]);
 				}
-				// printf("%d ",c[i][j][k]);
 			}
 			printf("\n");		
 		}
@@ -203,7 +202,6 @@ int check_collinear(int mcube[][50][50], int a, int b, int c){
 	int i1,j1,k1,i2,j2,k2,i3,j3,k3;
 	int area;
 	double x_ratio, y_ratio, z_ratio;
-	//printf("In check collinear\n");
 	if(check_sum(a,b,c)==false){
 		return false;
 	}
@@ -251,11 +249,9 @@ int check_collinear(int mcube[][50][50], int a, int b, int c){
         //body diagonal
     else if ((c1+c2+c3 == 0)&&(i1+i2+i3==3)&&(j1+j2+j3==3)&&(k1+k2+k3==3))
             {
-                //printf("i1+i2+i3=%d, j1+j2+j3=%d, k1+k2+k3=%d\n",i1+i2+i3,j1+j2+j3,k1+k2+k3);
                 area=0;            
             }
     else area=1;                
-	//printf("in check collinear, area=%d\n",area);	
 		if(area==0){
 			return true;
 		}
@@ -372,7 +368,6 @@ int check_lines(int mcube[][50][50], int list[]){
 			for(k=j+1;list[k]!=0;k++){
                 if((check_sum(list[i],list[j],list[k])==true)&&(check_collinear(mcube,list[i],list[j],list[k]) == true))
 				{
-				    //printf("check lines: list[i]=%d,list[j]=%d,list[k]%d\n",list[i],list[j],list[k]);
 				    count++;
 				}
 			}
@@ -380,4 +375,3 @@ int check_lines(int mcube[][50][50], int list[]){
 	}
 	return count;
 }
-

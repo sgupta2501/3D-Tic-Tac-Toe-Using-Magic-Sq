@@ -1,8 +1,6 @@
 #include "assignment1.h"
 int main(int argc, char *argv[]) 
 {	
-	// int empty_spaces[50]={};
-	// int empty_length;
 	int n;
  	//scanf("%d",&n);   //taking the size as input- fixing here to 3
  	n=3;
@@ -21,21 +19,15 @@ int main(int argc, char *argv[])
 	struct options second_preference;
 	struct options third_preference;
 
-	// printf("%d\n",check_collinear(mcube,25,14,3));
- //    int cube[50][50][50]={{{20,18,4},{15,1,26},{7,23,12}},
- //    				{{6,19,17},{25,14,3},{11,9,22}},
- //    				{{16,5,21},{2,27,13},{24,10,8}}};
-	// int board[50][50][50]={{{AI,18,AI},{AI,P1,26},{7,23,P1}},
- //    				{{6,19,17},{25,14,3},{11,9,22}},
- //    				{{16,5,21},{2,27,13},{24,10,8}}};
-	// print_cube(cube,3);
-	// printf("%d\n",point_to_add(cube,board,AI,ai,3));
-	// from here
+    int ai_line=0;
+    int p1_line=0;
+
 	int choice=1;
 	while(1){
 		printf("player first or ai?\n");
 		printf("1:player(default)\n");
 		printf("2:ai\n");
+		printf("First player gets x, second player gets o\n");
 		scanf("%d",&choice);
 		if(choice<1 || choice>2){
 			printf("wrong choice\n");
@@ -50,13 +42,13 @@ int main(int argc, char *argv[])
 				break;
 			}
 		}
-		system("clear");
+		//system("clear");
 	}
 	if(choice==1){
 		while(((pindex+aindex)!=27))
 		{
-    		 int ai_line=check_lines(mcube,ai);
-			 int p1_line=check_lines(mcube,p1);
+    		 ai_line=check_lines(mcube,ai);
+			 p1_line=check_lines(mcube,p1);
 			 printf("AI lines:%d\n",ai_line);
 			 printf("P1 lines:%d\n",p1_line);
 			 printf("...... ");
@@ -114,13 +106,11 @@ int main(int argc, char *argv[])
 				turn=AI;
 				int block=point_to_add(mcube,temp,p1,pindex);
     			printf("......****  ");
-
-				printf("block:%d\n",block);
+				printf("\n");
 				if(block==-1){
 					printf("ai_len:%d\n",aindex);
 					block=point_to_add(mcube,temp,ai,aindex);
 					if(block==-1){
-						//printf("in here\n");
 						pos_choice(temp,&second_preference,&first_preference,&third_preference);
 						if((first_preference.index)>=0){
 							if(put_val(temp,n,turn,first_preference.arr[0])==true){
@@ -152,8 +142,6 @@ int main(int argc, char *argv[])
 								printf("something went wrong\n");
 							}
 						}
-
-
 					}
 					else{
 						if(put_val(temp,n,AI,block)==true){
@@ -178,11 +166,6 @@ int main(int argc, char *argv[])
 				}
 						
 			}
-             printf("The Final Results are:\n"); 
-			 printf("AI lines:%d\n",ai_line);
-			 printf("P1 lines:%d\n",p1_line);	
-             if (ai_line==10) printf("AI WINS.....\n");
-             if (p1_line==10) printf("PLAYER WINS.....\n");			 		
 		}
 	}
 	else if(choice==2){
@@ -190,8 +173,8 @@ int main(int argc, char *argv[])
 		while(((pindex+aindex)!=27))
 		{
 			turn=AI;
-			 int ai_line=check_lines(mcube,ai);
-			 int p1_line=check_lines(mcube,p1);
+			 ai_line=check_lines(mcube,ai);
+			 p1_line=check_lines(mcube,p1);
 			 printf("AI lines:%d\n",ai_line);
 			 printf("P1 lines:%d\n",p1_line);
 			 printf("AI moves:");
@@ -201,7 +184,6 @@ int main(int argc, char *argv[])
 			 int pos;
 			 printf("\n\n");
 			 if(((pindex+aindex)<2) && (first==0)){
-				//printf("in here\n");
 				first=1;
 				if(put_val(temp,n,AI,14)==true){
 					printf("AI played at:%d ,successfully\n",14);
@@ -263,8 +245,6 @@ int main(int argc, char *argv[])
 								printf("something went wrong\n");
 							}
 						}
-
-
 					}
 					else{
 						if(put_val(temp,n,AI,block)==true){
@@ -287,9 +267,7 @@ int main(int argc, char *argv[])
 						printf("something went wrong\n");
 					}
 				}
-
 				print_board(temp,mcube,n);
-
 				printf("enter positon\n");
 				scanf("%d",&pos);
 				while (put_val(temp,n,P1,pos)==false){
@@ -301,18 +279,13 @@ int main(int argc, char *argv[])
 				pindex+=1;
 
 			}
-			// while (put_val(temp,n,turn,pos)==false){
-			// 	printf("value filled\n");
-			// 	printf("enter positon\n");
-			// 	scanf("%d",&pos);
-			// }
-
-             printf("The Final Results are:\n"); 
-			 printf("AI lines:%d\n",ai_line);
-			 printf("P1 lines:%d\n",p1_line);			
-             if (ai_line==10) printf("AI WINS.....\n");
-             if (p1_line==10) printf("PLAYER WINS.....\n");
 		}
 	}
+	printf("The Final Results are:\n"); 
+    printf("AI lines:%d\n",ai_line);
+    printf("P1 lines:%d\n",p1_line);			
+    if (ai_line==10) printf("AI WINS.....\n");
+    if (p1_line==10) printf("PLAYER WINS.....\n");
+
 	return 0;
 }
