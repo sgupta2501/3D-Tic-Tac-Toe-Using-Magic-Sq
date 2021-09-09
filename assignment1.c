@@ -231,17 +231,27 @@ int check_collinear(int mcube[0][50][50], int a, int b, int c){
 		}
     }
 
-	int c1=(i3-i1)/(i2-i1);
-	int c2=(j3-j1)/(j2-j1);
-	int c3=(k3-k1)/(k2-k1);
-	if((c1==c2) && (c2==c3)){
-		area=0;
-	}
-	else{
-		area=1;
-	}
-		
-
+    //points are (i1,j1,k1),(i2,j2,k2),(i3,j3,k3)
+    //assuming 3 distinct points
+    int c1=0, c2=0, c3=0;
+    
+    if ((i1==i2)&&(i2==i3)) c1=1;
+    if ((j1==j2)&&(j2==j3)) c2=1;
+    if ((k1==k2)&&(k2==k3)) c3=1;
+    
+    if (c1+c2+c3 == 2) //vertical/horiz 3 points on an edge or face of the cube
+        area=0;
+    else if (c1+c2+c3 == 1) // points on a diagonal on the face of the cube
+        {
+            if (((c1==1)&&(j1+j2+j3==3)&&(k1+k2+k3==3))||((c2==1)&&(i1+i2+i3==3)&&(k1+k2+k3==3))||((c3==1)&&(i1+i2+i3==3)&&(j1+j2+j3==3)))
+                area=0;
+        }
+    else if (c1+c2+c3 == 0)
+        {
+            if ((i1+i2+i3==3)&&(j1+j2+j3==3)&&(k1+k2+k3==3))
+                area=0;            
+        }
+    else area=1;                
 		
 		if(area==0){
 			return true;
