@@ -163,8 +163,7 @@ int main(int argc, char *argv[])
 					else{
 						printf("something went wrong\n");
 					}
-				}
-						
+				}		
 			}
 		}
 	}

@@ -1,5 +1,7 @@
 #include "assignment1.h"
-void display_moves(int a[],int size)
+
+//Traverse through the list and display each element of the list.
+void display_moves(int a[],int size) 
 {
     int i;
       for(i=0;i<size;i++)
@@ -9,6 +11,7 @@ void display_moves(int a[],int size)
       printf("\n");
 }
 
+//Check weather each element is not a part of the player moves and AI moves. If itrue, add to the empty spaces list. If not, check for the next element.
 void empty_spaces(int a[][50][50],int *arr,int *l,int n){
 	int len=0;
 	memset(arr,0,(*l)*sizeof(*arr));
@@ -24,6 +27,12 @@ void empty_spaces(int a[][50][50],int *arr,int *l,int n){
 	}
 	*l=len;
 }
+
+/*Fill an empty spot that is of the highest category in the following category:
+i) Centre of plane
+ii) Corners of plane
+iii) Left over points
+*/
 void pos_choice(int a[][50][50],struct options *temp1,struct options *temp2,struct options *temp3){
 	temp1->index=-1;
 	temp2->index=-1;
@@ -99,6 +108,7 @@ void pos_choice(int a[][50][50],struct options *temp1,struct options *temp2,stru
 	}
 }
 
+//Check if an element is present in an array.
 int check_if_present(int a[],int lenght,int find){
 	for(int i=0;i<lenght;i++){
 		if(a[i]==find){
@@ -107,7 +117,9 @@ int check_if_present(int a[],int lenght,int find){
 	}
 	return false;
 }
-void print_cube(int c[][50][50],int n){
+
+//Print the magic cube
+void print_cube(int c[][50][50],int n){  
  	for(int i=0;i<n;i++)
 	{
 		for(int j=0;j<n;j++)
@@ -121,6 +133,8 @@ void print_cube(int c[][50][50],int n){
 		printf("\n");
 	}
 }
+
+//Function to print the tic tac toe grid
 void print_board(int c[][50][50],int mcube[][50][50],int n){
  	for(int i=0;i<n;i++)
 	{
@@ -143,6 +157,8 @@ void print_board(int c[][50][50],int mcube[][50][50],int n){
 		printf("\n");
 	}
 }
+
+//For every element in the source cube, copy it into the same position in the destination cube
 void copy_cube(int other[][50][50],int main[][50][50],int n){
 	for(int i=0;i<n;i++)
 	{
@@ -155,6 +171,8 @@ void copy_cube(int other[][50][50],int main[][50][50],int n){
 		}
 	}
 }
+
+//Traverse through the array and find the element to be searched. Once the element has been found, mark the player’s icon in that position
 int put_val(int d[][50][50],int n,int player,int find){
 	for(int i=0;i<n;i++)
 	{
@@ -170,6 +188,8 @@ int put_val(int d[][50][50],int n,int player,int find){
 	}
 	return false;
 }
+
+//Traverse through the array. At each element of the cube, check if it is equal to the element to be found. If yes, return the position. If not, then check for the next elements
 void find_pos(int d[][50][50],int *a,int *b,int *c,int n,int find){
 	for(int i=0;i<n;i++)
 	{
@@ -187,6 +207,8 @@ void find_pos(int d[][50][50],int *a,int *b,int *c,int n,int find){
 	}
 
 }
+
+//Check the sum of the three numbers passed to function. If the sum is 42, return true, else return false.
 int check_sum(int a, int b, int c){
 	if((a+b+c)==42){
 		return true;
@@ -196,7 +218,7 @@ int check_sum(int a, int b, int c){
 	}
 }
 
-
+//check weather the points given are collinear
 int check_collinear(int mcube[][50][50], int a, int b, int c){
 	int i,j,k;
 	int i1,j1,k1,i2,j2,k2,i3,j3,k3;
@@ -260,6 +282,7 @@ int check_collinear(int mcube[][50][50], int a, int b, int c){
 		}
 }
 
+//generate the magic cube
 void magic_cube_gen(int mcube[][50][50],int n){
 	int count=2,i, j, k;
 	for(i=0;i<n;i++)
@@ -322,6 +345,8 @@ void magic_cube_gen(int mcube[][50][50],int n){
 		}
 	}
 }
+
+//take the absolute value of the difference
 int modulas_sub(int a,int b){
 	if((a-b)<0){
 		return (-1)*(a-b);
@@ -330,6 +355,16 @@ int modulas_sub(int a,int b){
 		return (a-b);
 	}
 }
+
+/*
+Check if the player can make a line by placing their symbol on an empty spot on the board. 
+If yes, block it. 
+If not, go to step 2.
+Check if AI can make a line by placing its symbol on an empty spot on the board. 
+If yes, play that spot. 
+If not, go to step 3.
+Go to pos_choice to determine your next move.
+*/
 int point_to_add(int mcube[][50][50],int temp[][50][50],int arr[],int len){
 	int empty_pos[27];
 	int empty_pos_len;
@@ -360,6 +395,7 @@ int point_to_add(int mcube[][50][50],int temp[][50][50],int arr[],int len){
 	return -1;
 }
 
+//Function to check no. of lines formed
 int check_lines(int mcube[][50][50], int list[]){
 	int i,j,k;
 	int count=0;
